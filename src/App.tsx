@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import YufaabInstance from './lib/api'
 import { AuthContextProvider } from './store/AuthContext'
+import './index.css';
 
 const App = () => {
   const yufaabInstance = new YufaabInstance(process.env.REACT_APP_BACKEND_URL)
