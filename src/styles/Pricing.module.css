@@ -1,0 +1,81 @@
+.pricingContainer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 20px;
+  }
+  
+  .pricingHeading {
+    color: rgb(167, 139, 250);
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .pricingSections {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  
+  .pricingSection {
+    width: 30%;
+    padding: 20px;
+    text-align: center;
+    margin: 0 10px;
+    background-color: rgb(31, 41, 55);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid rgb(31, 41, 55);
+  }
+  
+  .pricingSection:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .selectedSection {
+    background-color: rgb(124, 58, 237);
+  }
+  
+  .features {
+    margin-top: 20px;
+  }
+  
+  .features p {
+    font-size: 1em;
+    color: #fff;;
+  }
+  
+  .buyNowButton {
+    background-color: rgb(167, 139, 250);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: 4px;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .2s;
+  }
+  
+  .buyNowButton:hover {
+    background-color: rgb(97, 74, 165);
+  }
+  
+  @media screen and (max-width: 767px) {
+    .pricingSections {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .pricingSection {
+      width: 100%;
+      margin: 10px 0;
+    }
+  }
+  
