@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import YufaabInstance from './lib/api'
 import { AuthContextProvider } from './store/AuthContext'
 import './index.css';
+import Auth from './pages/Auth'
+import Details from './pages/Details'
 
 const App = () => {
   const yufaabInstance = new YufaabInstance(process.env.REACT_APP_BACKEND_URL)
@@ -17,6 +19,8 @@ const App = () => {
           <main className="py-3">
             <Container>
               <Routes>
+                <Route path="/details" element={<Details />} />
+                <Route path='/login' element={<Auth />} />
                 <Route path="/" element={<Home />} />
               </Routes>
             </Container>

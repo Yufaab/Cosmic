@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/Pricing.module.css';
+import { LinkContainer } from 'react-router-bootstrap'
 
 const Pricing = () => {
   const [selectedSection, setSelectedSection] = useState<number>(2);
@@ -45,7 +46,9 @@ const Pricing = () => {
                 <p key={featureIndex}>{feature}</p>
               ))}
             </div>
+            <LinkContainer to='/details'>
             <button className={styles.buyNowButton}>Buy Now</button>
+            </LinkContainer>
           </div>
         ))}
       </div>

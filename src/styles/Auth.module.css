@@ -1,0 +1,111 @@
+.authContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+  }
+  
+  .authForm {
+    /* background-color: rgb(31, 41, 55); */
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    min-width: 350px;
+    text-align: left;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid #ccc;
+  }
+  input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+  }
+  .authForm h2 {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .formGroup label {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  
+  .formGroup input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgb(152, 122, 240);
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .formGroup input:focus {
+    border-color: 0px solid rgb(152, 122, 240);
+  }
+  
+  .loginSignUpButton {
+    background-color: rgb(152, 122, 240);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: rgb(167, 139, 250);
+    }
+  }
+  .error {
+    border-color: #ff0000;
+  }
+  
+  .errorMessage {
+    color: #ff0000;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .required {
+    color: #ff0000;
+    font-weight: bold;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    margin-top: 0;
+    padding-top: 10px;
+  
+    &:hover {
+      color: #333;
+      text-decoration: underline;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .authForm {
+      max-width: 370px;
+    }
+  }

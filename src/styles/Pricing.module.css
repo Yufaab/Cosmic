@@ -5,7 +5,7 @@
   }
   
   .pricingHeading {
-    color: rgb(167, 139, 250);
+    color: #fff;
     font-size: 2em;
     margin-bottom: 20px;
   }
@@ -47,24 +47,18 @@
   }
   
   .buyNowButton {
-    background-color: rgb(167, 139, 250);
-    color: black;
-    border: none;
+    background-color: rgb(152, 122, 240);
+    color: #fff;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    font-weight: 700;
+    border: none;
     border-radius: 4px;
-    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-    transition-duration: .2s;
-  }
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
   
-  .buyNowButton:hover {
-    background-color: rgb(97, 74, 165);
+    &:hover {
+      background-color: rgb(167, 139, 250);
+    }
   }
   
   @media screen and (max-width: 767px) {
