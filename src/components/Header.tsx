@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import styles from '../styles/Header.module.css'
+import UserProfile from './UserProfile'
+import Modal from './Modal'
 
 const Header = () => {
+
+  const [showProfile, setShowProfile] = useState(false);
+
+  const user = {
+    name: 'Jazib Eqbal',
+    email: 'jazib@gmail.com',
+  };
+
+  const handleAccountClick = () => {
+    setShowProfile(true);
+  };
+
+  const handleCloseProfile = () => {
+    setShowProfile(false);
+  };
+
   return (
     <header>
       <Navbar
@@ -27,12 +45,12 @@ const Header = () => {
               </LinkContainer>
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>Cart
+                  <i className="fas fa-shopping-cart"></i>Cart**
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/user/my/orders">
+              <LinkContainer to="/user/reports">
                 <Nav.Link>
-                  <i className="fas fa-user"></i>My Orders
+                  <i className="fas fa-user"></i>Reports
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
@@ -40,7 +58,23 @@ const Header = () => {
                   <i className="fas fa-user"></i>Sign In
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/login/admin">
+              {/* <LinkContainer to="/user/account"> */}
+              <Nav.Link>
+                <div onClick={handleAccountClick}>Profile</div>
+                {showProfile && (
+                  <Modal onClose={handleCloseProfile}>
+                    <UserProfile user={user} />
+                  </Modal>
+                )}
+                {/* <i className="fas fa-user"></i>Account */}
+                </Nav.Link>
+              {/* </LinkContainer> */}
+              <LinkContainer to="/about">
+                <Nav.Link>
+                  <i className="fas fa-user"></i>About Us
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/admin">
                 <Nav.Link>
                   <i className="fas fa-user"></i>Admin
                 </Nav.Link>

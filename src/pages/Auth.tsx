@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/Auth.module.css';
+import { useNavigate } from 'react-router-dom';
 
 interface UserCredentials {
   email: string;
@@ -11,6 +12,7 @@ interface UserRegistration extends UserCredentials {
 }
 
 const LoginPage: React.FC<{ onLogin: (credentials: UserCredentials) => void }> = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<UserCredentials>({
     email: '',
     password: '',
@@ -20,18 +22,23 @@ const LoginPage: React.FC<{ onLogin: (credentials: UserCredentials) => void }> =
 
   const handleInputChange = (name: string, value: string | number) => {
     setFormData({ ...formData, [name]: value });
+
+    if (name === 'email') {
+      setIsEmail(true);
+    } else if (name === 'password') {
+      setIsPassword(true);
+    }
   };
 
   const handleLogin = () => {
     setIsEmail(!!formData.email);
     setIsPassword(!!formData.password);
 
-    const isFormValid =
-      !!formData.email &&
-      !!formData.password
+    const isFormValid = !!formData.email && !!formData.password;
 
     if (isFormValid) {
       console.log('Form data:', formData);
+      navigate('/');
     }
   };
 
@@ -72,6 +79,7 @@ const LoginPage: React.FC<{ onLogin: (credentials: UserCredentials) => void }> =
 };
 
 const SignupPage: React.FC<{ onSignup: (userData: UserRegistration) => void }> = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<UserRegistration>({
     email: '',
     password: '',
@@ -84,6 +92,14 @@ const SignupPage: React.FC<{ onSignup: (userData: UserRegistration) => void }> =
 
   const handleInputChange = (name: string, value: string | number) => {
     setFormData({ ...formData, [name]: value });
+
+    if (name === 'username') {
+      setIsUserName(true);
+    } else if (name === 'email') {
+      setIsEmail(true);
+    } else if (name === 'password') {
+      setIsPassword(true);
+    }
   };
 
   const handleSignUp = () => {
@@ -91,13 +107,11 @@ const SignupPage: React.FC<{ onSignup: (userData: UserRegistration) => void }> =
     setIsEmail(!!formData.email);
     setIsPassword(!!formData.password);
 
-    const isFormValid =
-      !!formData.email &&
-      !!formData.password &&
-      !!formData.username
+    const isFormValid = !!formData.email && !!formData.password && !!formData.username;
 
     if (isFormValid) {
       console.log('Form data:', formData);
+      navigate('/');
     }
   };
 
@@ -113,7 +127,7 @@ const SignupPage: React.FC<{ onSignup: (userData: UserRegistration) => void }> =
             onChange={(e) => handleInputChange('username', e.target.value)}
             className={!isUser ? styles.error : ''}
           />
-            {!isUser && (
+          {!isUser && (
             <span className={styles.errorMessage}>Username is required.</span>
           )}
         </div>
