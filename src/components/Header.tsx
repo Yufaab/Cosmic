@@ -6,9 +6,7 @@ import UserProfile from './UserProfile'
 import Modal from './Modal'
 
 const Header = () => {
-
   const [showProfile, setShowProfile] = useState(false);
-
   const user = {
     name: 'Jazib Eqbal',
     email: 'jazib@gmail.com',
@@ -39,27 +37,22 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto float-right flex">
               <LinkContainer to="/">
-                <Nav.Link>
-                  <i></i>Home
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>Cart**
+                <Nav.Link className={styles.headerStyle}>
+                  Home
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/user/reports">
-                <Nav.Link>
+                <Nav.Link className={styles.headerStyle}>
                   <i className="fas fa-user"></i>Reports
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
-                <Nav.Link>
+                <Nav.Link className={styles.headerStyle}>
                   <i className="fas fa-user"></i>Sign In
                 </Nav.Link>
               </LinkContainer>
               {/* <LinkContainer to="/user/account"> */}
-              <Nav.Link>
+              <Nav.Link className={styles.headerStyle}>
                 <div onClick={handleAccountClick}>Profile</div>
                 {showProfile && (
                   <Modal onClose={handleCloseProfile}>
@@ -70,12 +63,12 @@ const Header = () => {
                 </Nav.Link>
               {/* </LinkContainer> */}
               <LinkContainer to="/about">
-                <Nav.Link>
+                <Nav.Link className={styles.headerStyle}>
                   <i className="fas fa-user"></i>About Us
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/admin">
-                <Nav.Link>
+                <Nav.Link className={styles.headerStyle}>
                   <i className="fas fa-user"></i>Admin
                 </Nav.Link>
               </LinkContainer>

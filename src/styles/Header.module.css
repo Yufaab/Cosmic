@@ -5,3 +5,10 @@
 .mainHead{
     font-size: 36px !important;
 }
+.mainHead:hover{
+    color: rgb(152, 122, 240) !important;
+    /* transition:  0.2s ease-in-out */
+}
+.headerStyle:hover{
+    color: rgb(152, 122, 240) !important;
+}
