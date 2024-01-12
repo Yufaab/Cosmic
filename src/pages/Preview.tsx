@@ -21,7 +21,7 @@ const Preview: React.FC<PreviewProps> = () => {
   
     return (
       <div className={styles.previewContainer}>
-        <h2 className={styles.previewHeading}>Preview</h2>
+        <h2 className={styles.previewHeading}>Preview your filled details</h2>
         <div className={styles.summary}>
           <p>
             <strong>Rank:</strong>{' '}

@@ -3,6 +3,7 @@ import xx from '../utils/B303.svg'
 import styles from '../styles/Home.module.css'
 import Feature from '../components/Feature'
 import Pricing from '../components/Pricing'
+import Footer from '../components/Footer'
 
 const Home = () => {
 
@@ -31,6 +32,7 @@ const Home = () => {
     <div id="pricingSection">
       <Pricing />
     </div>
+    <Footer />
     </>
   )
 }
