@@ -212,7 +212,7 @@ const Details: React.FC = () => {
           </select>
         </div>
         <button className={styles.submitButton} onClick={handleSubmit}>
-          Submit
+          Save & Proceed
         </button>
       </div>
     </div>

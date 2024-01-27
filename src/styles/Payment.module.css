@@ -1,0 +1,19 @@
+.proceedToPaymentButton {
+  background-color: rgb(152, 122, 240);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.proceedToPaymentButton:hover {
+  background-color: rgb(167, 139, 250);
+}
+
+.paymentContainer p {
+    color: aqua;
+}

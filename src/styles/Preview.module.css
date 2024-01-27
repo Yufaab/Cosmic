@@ -1,0 +1,69 @@
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.previewHeading {
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.summary {
+  width: 400px;
+  min-width: 370px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.summary p {
+  margin-bottom: 15px;
+}
+
+.summary strong {
+  font-weight: bold;
+  color: rgb(152, 122, 240);
+}
+
+.highlight {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.backButton,
+.proceedButton {
+  background-color: rgb(152, 122, 240);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.backButton:hover,
+.proceedButton:hover {
+  background-color: rgb(167, 139, 250);
+}
+
+@media screen and (max-width: 767px) {
+  .summary {
+    max-width: 370px;
+  }
+}
