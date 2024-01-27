@@ -1,81 +1,108 @@
-import React, { useState } from 'react';
-import styles from '../styles/Details.module.css';
-import stateOptions from '../utils/states.json';
-import branchOptions from '../utils/branch.json';
-import collegeOptions from '../utils/institute.json';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import styles from '../styles/Details.module.css'
+import stateOptions from '../utils/states.json'
+import { useNavigate } from 'react-router-dom'
+import AuthContext from '../store/AuthContext'
 
 interface UserData {
-  rank: string;
-  category: string;
-  gender: string;
-  categoryRank: string;
-  state: string;
-  branch: string;
-  college: string;
+  rank: string
+  category: string
+  gender: string
+  categoryRank: string
+  state: string
+  branch: string[]
+  college: string[]
 }
 
+interface ApiRes {
+  instituteList: string[],
+  branchList: string[]
+}
+
+type StringSetter = React.Dispatch<React.SetStateAction<string>>
+
+type ListSetter = React.Dispatch<React.SetStateAction<string[]>>
+
 const Details: React.FC = () => {
+  const yufaabInstance = useContext(AuthContext)
+  const [apiData, setApiData] = useState<ApiRes>()
+  const [instituteList, setInstituteList] = useState<string[]>([])
+  const [branchList, setBranchList] = useState<string[]>([])
+  const [stateList, setStateList] = useState<string[]>([])
   const [formData, setFormData] = useState<UserData>({
     rank: '',
     category: '',
     gender: '',
     categoryRank: '',
     state: '',
-    branch: '',
-    college: '',
-  });
+    branch: [],
+    college: [],
+  })
+  const [branchData, setBranch] = useState<string>('')
+  const [instituteData, setInstitute] = useState<string>('')
+  const [stateData, setState] = useState<string>('')
 
-  // useEffect(() => {
-  //   const storedFormDataString = localStorage.getItem('formData');
-  //   if (storedFormDataString) {
-  //     const storedFormData = JSON.parse(storedFormDataString);
-  //     setFormData(storedFormData);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await yufaabInstance?.getSearchQuery()
+      if(data){
+        setApiData(data)
+      }
+    }
+    fetchData()
+  }, [yufaabInstance, setInstituteList, setBranchList])
 
-  const navigate = useNavigate();
-  const [isRankValid, setIsRankValid] = useState<boolean>(true);
-  const [isCategoryValid, setIsCategoryValid] = useState<boolean>(true);
-  const [isGenderValid, setIsGenderValid] = useState<boolean>(true);
-  const [isStateValid, setIsStateValid] = useState<boolean>(true);
+  const navigate = useNavigate()
+  const [isRankValid, setIsRankValid] = useState<boolean>(true)
+  const [isCategoryValid, setIsCategoryValid] = useState<boolean>(true)
+  const [isGenderValid, setIsGenderValid] = useState<boolean>(true)
+  const [isStateValid, setIsStateValid] = useState<boolean>(true)
 
   const handleInputChange = (name: string, value: string | number) => {
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value })
     if (name === 'rank') {
-      setIsRankValid(true);
+      setIsRankValid(true)
     } else if (name === 'gender') {
-      setIsGenderValid(true);
-    } else if (name === 'state'){
-      setIsStateValid(true);
+      setIsGenderValid(true)
+    } else if (name === 'state') {
+      setIsStateValid(true)
     }
-  };
+  }
 
   const handleCategoryChange = (name: string, value: string) => {
-    setFormData({ ...formData, category: value });
-    if (name === 'category'){
-      setIsCategoryValid(true);
+    setFormData({ ...formData, category: value })
+    if (name === 'category') {
+      setIsCategoryValid(true)
     }
-  };
+  }
+
+  const handleDynamicInput = (value: string, sourceData: string[] | undefined, LabelSetter: StringSetter, ListSetter: ListSetter) => {
+    LabelSetter(value)
+    if(value.length === 0){
+      ListSetter([])
+      return;
+    }
+    ListSetter(sourceData?.filter(data => data.toLowerCase().includes(value.toLowerCase())) || [])
+  }
 
   const handleSubmit = () => {
-    setIsRankValid(!!formData.rank);
-    setIsCategoryValid(!!formData.category);
-    setIsGenderValid(!!formData.gender);
-    setIsStateValid(!!formData.state);
+    setIsRankValid(!!formData.rank)
+    setIsCategoryValid(!!formData.category)
+    setIsGenderValid(!!formData.gender)
+    setIsStateValid(!!formData.state)
 
     const isFormValid =
       !!formData.rank &&
       !!formData.category &&
       !!formData.gender &&
-      !!formData.state;
+      !!formData.state
 
     if (isFormValid) {
-      console.log('Form data:', formData);
+      console.log('Form data:', formData)
       // localStorage.setItem('formData', JSON.stringify(formData));
-      navigate('/details/preview', { state: { formData } });
+      navigate('/details/preview', { state: { formData } })
     }
-  };
+  }
 
   return (
     <div className={styles.detailsContainer}>
@@ -153,9 +180,7 @@ const Details: React.FC = () => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="categoryRank">
-            Category Rank
-          </label>
+          <label htmlFor="categoryRank">Category Rank</label>
           <input
             type="text"
             id="categoryRank"
@@ -165,58 +190,52 @@ const Details: React.FC = () => {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="state">
-            State<span className={styles.required}>*</span>
+            State
           </label>
-          <select
+          <input
+            type="text"
             id="state"
-            value={formData.state}
-            onChange={(e) => handleInputChange('state', e.target.value)}
-            className={!isStateValid ? styles.error : ''}
-          >
-            {stateOptions.IndianStates.map((state: string, index: number) => (
-              <option key={index} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
-          {!isStateValid && (
-            <span className={styles.errorMessage}>State is required.</span>
-          )}
+            value={stateData}
+            onChange={(e) => handleDynamicInput(e.target.value, stateOptions.IndianStates, setState, setStateList)}
+          />
+          <div>
+            {stateList.map((state, index )=> <p key={index}>{state}</p>)}
+          </div>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="branch">Branch</label>
-          <select
+          <label htmlFor="branch">
+            Branch Preference
+          </label>
+          <input
+            type="text"
             id="branch"
-            value={formData.branch}
-            onChange={(e) => handleInputChange('branch', e.target.value)}
-          >
-            {branchOptions.branches2022.map((branch: string, index: number) => (
-              <option key={index} value={branch}>
-                {branch}
-              </option>
-            ))}
-          </select>
+            value={branchData}
+            onChange={(e) => handleDynamicInput(e.target.value, apiData?.branchList, setBranch, setBranchList)}
+          />
+          <ul>
+            {branchList.map((branch, index )=> <p key={index}>{branch}</p>)}
+          </ul>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="college">Colleges</label>
-          <select
-            id="college"
-            value={formData.college}
-            onChange={(e) => handleInputChange('college', e.target.value)}
-          >
-            {collegeOptions.institute2022.map((college: string, index: number) => (
-              <option key={index} value={college}>
-                {college}
-              </option>
-            ))}
-          </select>
+          <label htmlFor="institute">
+            Institute Preference
+          </label>
+          <input
+            type="text"
+            id="institute"
+            value={instituteData}
+            onChange={(e) => handleDynamicInput(e.target.value, apiData?.instituteList, setInstitute, setInstituteList)}
+          />
+          <div>
+            {instituteList.map((institute, index )=> <p key={index}>{institute}</p>)}
+          </div>
         </div>
         <button className={styles.submitButton} onClick={handleSubmit}>
           Save & Proceed
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details

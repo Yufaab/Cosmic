@@ -68,6 +68,19 @@ class YufaabInstance {
       console.error(e)
     }
   }
+
+  async getSearchQuery() {
+    try {
+      const options = {
+        method: 'GET',
+        url: `${this.host}/api/student/get-query-data`
+      }
+      const res = await axios(options)
+      return res.data
+    } catch (e) {
+      console.error(e)
+    }
+  }
 }
 
 export default YufaabInstance
