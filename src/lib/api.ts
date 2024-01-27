@@ -1,5 +1,17 @@
 import axios from 'axios'
 
+interface UserCredentials {
+  email?: string
+  password?: string
+  google_token?: string
+}
+
+interface UserRegistration extends UserCredentials {
+  firstname?: string
+  lastname?: string
+  phone?: string
+}
+
 class YufaabInstance {
   host: string | undefined
   constructor(host: string | undefined) {
@@ -16,14 +28,15 @@ class YufaabInstance {
     return localStorage.getItem('token');
   }
 
-  async login(email: string, password: string) {
+  async login(userCredentials: UserCredentials) {
     try {
       const options = {
         method: 'POST',
         url: `${this.host}/api/student/login`,
         data: {
-          email: email,
-          password: password,
+          email: userCredentials.email,
+          password: userCredentials.password,
+          googleAccessToken: userCredentials.google_token
         },
       }
       const res = await axios(options)
@@ -34,15 +47,18 @@ class YufaabInstance {
     }
   }
 
-  async signup(username: string, email: string, password: string) {
+  async signup(userRegistration: UserRegistration) {
     try {
       const options = {
         method: 'POST',
         url: `${this.host}/api/student/signup`,
         data: {
-          username: username,
-          email: email,
-          password: password,
+          firstname: userRegistration.firstname,
+          lastname: userRegistration.lastname,
+          email: userRegistration.email,
+          password: userRegistration.password,
+          phone: userRegistration.phone,
+          googleAccessToken: userRegistration.google_token
         },
       }
       const res = await axios(options)

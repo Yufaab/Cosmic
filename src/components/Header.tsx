@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import styles from '../styles/Header.module.css'
-import UserProfile from './UserProfile'
-import Modal from './Modal'
+// import UserProfile from './UserProfile'
+// import Modal from './Modal'
 
 const Header = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -54,11 +54,11 @@ const Header = () => {
               {/* <LinkContainer to="/user/account"> */}
               <Nav.Link className={styles.headerStyle}>
                 <div onClick={handleAccountClick}>Profile</div>
-                {showProfile && (
+                {/* {showProfile && (
                   <Modal onClose={handleCloseProfile}>
                     <UserProfile user={user} />
                   </Modal>
-                )}
+                )} */}
                 {/* <i className="fas fa-user"></i>Account */}
                 </Nav.Link>
               {/* </LinkContainer> */}
